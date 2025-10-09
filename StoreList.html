@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Gallery</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-326405830"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-326405830');
+    </script>
+    <style>
+        /* ... (All your existing CSS styles remain exactly the same) ... */
+    </style>
+</head>
+<body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .product-description {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .buy-now-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-now-btn:hover {
+            background: linear-gradient(to right, #5a0db9, #1c68e6);
+            box-shadow: 0 4px 12px rgba(37, 117, 252, 0.3);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .products-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .products-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Product Gallery</h1>
+        </header>
+        
+        <div class="products-container" id="productsContainer">
+            <!-- Products will be dynamically added here -->
+        </div>
+        
+        <footer>
+            <p>Follow Me On Instagram @electrodonut</p>
+        </footer>
+    </div>
+
+    <script>
+        // PRODUCT DATA - Add your products here
+        // Format: { image: "image-url", title: "Product Name", description: "Product Description", link: "buy-now-url" }
+        const products = [
+            {
+                image: "https://raw.githubusercontent.com/vishalsoniindia/ShopRedirectLink/refs/heads/main/asset/trapped_soul.png?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                title: "Trapped Soul Pendent",
+                description: "The pendant shows an animated soul inside, struggling to escape its trap.",
+                link: " https://www.tindie.com/products/40079/"
+            }
+        ];
+
+        // Function to render products
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            
+            if (products.length === 0) {
+                container.innerHTML = '<div class="empty-state">No products available. Add some products to the array.</div>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.title}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <a href="${product.link}" target="_blank" class="buy-now-btn">Buy Now</a>
+                    </div>
+                `;
+                
+                container.appendChild(productCard);
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', renderProducts);
+    </script>
+</body>
+</html>
+</body>
+</html>
